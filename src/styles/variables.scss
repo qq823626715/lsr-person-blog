@@ -1,0 +1,13 @@
+$main_color:#fff; // 主色调
+$main_border_color: #CECECE;
+$padding: 16px;
+$header_height: 80px;
+$footer_height: 80px;
+
+:export {
+  padding: $padding;
+  main_color: $main_color;
+  main_border_color: $main_border_color;
+  header_height: $header_height;
+  footer_height: $footer_height;
+}
