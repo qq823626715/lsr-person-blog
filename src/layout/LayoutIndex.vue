@@ -18,7 +18,5 @@ import LayoutFooter from './LayoutFooter.vue';
 </template>
 
 <style lang="scss" scoped>
-.layout-warpper {
-  padding-top: $header_height;
-}
+
 </style>

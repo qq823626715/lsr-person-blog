@@ -13,6 +13,8 @@ const locale = ref('zh')
   </div>
 </template>
 
-<style scoped>
-
+<style lang="scss" scoped>
+#app {
+  min-width: $content_width;
+}
 </style>

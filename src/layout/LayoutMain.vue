@@ -8,15 +8,14 @@ import { RouterView } from 'vue-router'
 </script>
 <template>
   <div class="main-wrapper">
-    <transition name="fade-transform" mode="out-in">
-      <RouterView :key="key" />
-    </transition>
+    <router-view v-slot="{ Component }">
+      <transition>
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.main-wrapper {
-  height: calc(100vh - #{$header_height} - #{$footer_height});
-  overflow: auto;
-}
+
 </style>

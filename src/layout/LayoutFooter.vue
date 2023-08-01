@@ -12,9 +12,5 @@
 </template>
 
 <style lang="scss" scoped>
-.footer-wrapper {
-  border-top: 1px solid $main_border_color;
-  height: $footer_height;
-  width: 100%;
-}
+
 </style>

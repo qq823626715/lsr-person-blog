@@ -7,18 +7,19 @@
 </script>
 <template>
   <div class="header-wrapper">
-    我是页眉
+    <div class="header-container">
+      <div class="border logo-wrapper">我是logo</div>
+      <div class="border menu-wrapper">
+        
+      </div>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.header-wrapper {
-  height: $header_height;
-  width: 100%;
-  // border-bottom: 1px solid $main_border_color;
-  z-index: 1;
-  box-shadow: 0 0px 10px 0 rgba(0, 0, 0, 0.1);
-  position: fixed;
-  top: 0;
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 </style>
