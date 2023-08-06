@@ -1,10 +1,12 @@
 @import './transition.scss';
 @import './layout.scss';
+// @use './transition.scss' as *;
+// @use './layout.scss' as *;
 
 body {
   margin: 0;
   box-sizing: border-box;
-  font-family: "Microsoft YaHei UI Light";
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "\5fae\8f6f\96c5\9ed1", Arial, sans-serif;;
 }
 
 * {
