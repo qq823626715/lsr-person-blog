@@ -2,8 +2,22 @@
  * @Description: 页眉组件
 -->
 <script setup>
-import { ref } from 'vue';
-const activeIndex = ref('/home')
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import NavMenuItem from './components/NavMenuItem.vue';
+import { constantRoutes } from '@/router'
+
+const activeIndex = computed(() => {
+  const route = useRoute()
+  const { meta, path } = route
+  if (meta.activeMenu) {
+    return meta.activeMenu
+  }
+  return path
+})
+const menuRouters = computed(() => {
+  return constantRoutes
+})
 </script>
 <template>
   <div class="header-wrapper">
@@ -16,8 +30,7 @@ const activeIndex = ref('/home')
           class="el-menu-demo menu-wrapper"
           mode="horizontal"
         >
-          <el-menu-item index="/home">home</el-menu-item>
-          <el-menu-item index="/about">about</el-menu-item>
+          <nav-menu-item v-for="route in menuRouters" :key="route.path" :menu-item="route" :base-path="route.path" />
         </el-menu>
       </div>
     </div>
@@ -36,10 +49,10 @@ const activeIndex = ref('/home')
   justify-content: flex-end;
 }
 .el-menu-demo {
-  --el-menu-active-color: #FFFFFF;
-  --el-menu-bg-color: $main_bg;
-  --el-menu-border-color: $main_bg;
-  --el-menu-hover-text-color: #FFFFFF;
+  --el-menu-active-color: #{$main_color};
+  --el-menu-bg-color:  #{$main_bg};
+  --el-menu-border-color:  #{$main_bg};
+  --el-menu-hover-text-color:  #{$main_color};
   --el-menu-hover-bg-color: #00000010
 }
 </style>

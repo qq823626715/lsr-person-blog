@@ -1,6 +1,10 @@
 <script setup>
-import { ref } from 'vue';
-
+import { computed, reactive, ref } from 'vue';
+const testArr = reactive([])
+const testData = computed(() => {
+  return 1
+})
+console.log(testData.value)
 </script>
 <template>
   <div class="about">

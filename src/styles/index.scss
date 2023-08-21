@@ -1,12 +1,13 @@
-@import './transition.scss';
-@import './layout.scss';
+@import "./transition.scss";
+@import "./layout.scss";
 // @use './transition.scss' as *;
 // @use './layout.scss' as *;
 
 body {
   margin: 0;
   box-sizing: border-box;
-  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "\5fae\8f6f\96c5\9ed1", Arial, sans-serif;;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "\5fae\8f6f\96c5\9ed1",
+    Arial, sans-serif;
 }
 
 * {
@@ -18,14 +19,14 @@ body {
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
-  background-color: $main_bg;
+  // background-color: $main_bg;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #FFFFFF88;
+  background-color: #c0c0c088;
   border-radius: 4px;
   &:hover {
-    background-color: #FFFFFF;
+    background-color: #c0c0c0;
   }
 }
 ::-webkit-scrollbar-track {
