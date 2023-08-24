@@ -3,11 +3,11 @@
 -->
 <script setup>
 import { ref, reactive } from 'vue';
-
+import DrawNumber from '@/components/DrawNumber.vue'
 </script>
 <template>
   <div>
-    12
+    <DrawNumber />
   </div>
 </template>
 
