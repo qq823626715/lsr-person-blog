@@ -30,7 +30,12 @@ const menuRouters = computed(() => {
           class="el-menu-demo menu-wrapper"
           mode="horizontal"
         >
-          <nav-menu-item v-for="route in menuRouters" :key="route.path" :menu-item="route" :base-path="route.path" />
+          <nav-menu-item
+            v-for="route in menuRouters.filter(item => !item.hidden)"
+            :key="route.path"
+            :menu-item="route"
+            :base-path="route.path"
+          />
         </el-menu>
       </div>
     </div>

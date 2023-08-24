@@ -2,9 +2,9 @@
  * @Description: 菜单组件
 -->
 <script setup>
-import { ref, computed, onMounted } from 'vue';
-import path from 'path'
-
+import { ref, computed, onBeforeMount } from 'vue';
+import { resolve } from 'path'
+import { ElMenuItem, ElSubMenu } from 'element-plus'
 const props = defineProps({
   menuItem: {
     type: Object,
@@ -15,51 +15,38 @@ const props = defineProps({
     required: true
   }
 })
-const showingChildren = ref([])
-const actualMenuItem = ref([])
-const isMenuItem = computed(() => {
-  return (showingChildren.value.length === 1 || showingChildren.value.length === 0) &&
-        (!actualMenuItem.value.children || actualMenuItem.value.noShowingChildren) && !props.menuItem.alwaysShow
+const isHeaf = computed(() => {
+  return !(props.menuItem?.children?.length > 0)
 })
-const componentName = computed(() => { return isMenuItem.value? 'el-menu-item': 'el-submenu'})
-onMounted(() => {
-  if (!props.menuItem.hidden) {
-    if (props.menuItem.children) {
-      showingChildren.value = props.menuItem.children.filter(item => {
-        return !item.hidden
-      }) || []
-    }
-    if (showingChildren.value.length > 0) {
-      actualMenuItem.value = showingChildren.value[showingChildren.value.length - 1]
-    } else {
-      actualMenuItem.value = { ...props.menuItem, path: '', noShowingChildren: true }
-    }
+const subMenuItems = ref([])
+onBeforeMount(() => {
+  if(!isHeaf.value) {
+    subMenuItems.value = props.menuItem.children.filter(item => !item.hidden)
   }
 })
 function resolvePath(routePath) {
-  return path.resolve(props.basePath, routePath)
+  return resolve(props.basePath, routePath)
 }
 </script>
 
 <template>
-  <component v-if="!menuItem.hidden" :ref="isMenuItem?'subMenu':'menuItem'" :is="componentName" :index="resolvePath(actualMenuItem.path)">
-    <template v-if="isMenuItem">
-      <svg-icon v-if="actualMenuItem.meta && actualMenuItem.meta.icon" :icon-class="actualMenuItem.meta.icon" class="menu-icon" />
-      <span>{{ actualMenuItem.meta && actualMenuItem.meta.title }}</span>
-    </template>
-    <template v-if="!isMenuItem" v-slot:title>
-      <svg-icon v-if="menuItem.meta && menuItem.meta.icon" :icon-class="menuItem.meta.icon" class="menu-icon" />
+  <el-menu-item v-if="isHeaf || subMenuItems.length === 0" ref="menuItem" :index="resolvePath(menuItem.path || '')">
+    <template #default>
+      <!-- <svg-icon v-if="menuItem.meta && menuItem.meta.icon" :icon-class="menuItem.meta.icon" class="menu-icon" /> -->
       <span>{{ menuItem.meta && menuItem.meta.title }}</span>
     </template>
-    <template v-if="!isMenuItem">
-      <nav-menu-item
-        v-for="child in menuItem.children"
-        :key="menuItem.path + child.path"
-        :menu-item="child"
-        :base-path="resolvePath(child.path)"
-      ></nav-menu-item>
+  </el-menu-item>
+  <el-sub-menu v-else :index="resolvePath(menuItem.path || '')">
+    <template #title>
+      <span>{{ menuItem.meta && menuItem.meta.title }}</span>
     </template>
-  </component>
+    <nav-menu-item
+      v-for="subMenu in subMenuItems"
+      :key="menuItem.path + subMenu.path"
+      :menu-item="subMenu"
+      :base-path="resolvePath(menuItem.path)"
+    />
+  </el-sub-menu>
 </template>
 
 <style lang="scss" scoped>
