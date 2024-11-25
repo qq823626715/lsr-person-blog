@@ -31,7 +31,7 @@ watch(() => props.content, (newQuestion, oldQuestion) => {
 <template>
   <div v-bind="$attrs" class="draw">
     <div class="draw-item draw-static" :data-active="activeContent" :data-next="nextContent"></div>
-    <div class="draw-item draw-dynamic" :class="{ 'active': underway }" :data-active="nextContent" :data-next="activeContent"></div>
+    <div class="draw-item draw-dynamic" :class="{ 'active': underway }" :data-active="activeContent" :data-next="nextContent"></div>
   </div>
 </template>
 
@@ -98,7 +98,7 @@ watch(() => props.content, (newQuestion, oldQuestion) => {
   // transform: rotateX(180deg);
   border-radius: 0  0 10px 10px;
   &::before {
-    content: attr(data-active);
+    content: attr(data-next);
     width: 80px;
     height: 70px;
     top: 0;
@@ -110,7 +110,7 @@ watch(() => props.content, (newQuestion, oldQuestion) => {
     overflow: hidden;
   }
   &::after {
-    content: attr(data-next);
+    content: attr(data-active);
     width: 80px;
     height: 70px;
     line-height: 140px;
@@ -119,7 +119,7 @@ watch(() => props.content, (newQuestion, oldQuestion) => {
     overflow: hidden;
   }
   &.active {
-    animation: draw 0.2s linear;
+    animation: draw 0.25s linear;
   }
 }
 
